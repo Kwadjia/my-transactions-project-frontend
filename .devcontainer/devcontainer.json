@@ -1,0 +1,8 @@
+{
+    "name": "Transactions Project Dev Container",
+    "dockerComposeFile": ["../docker-compose.yml"],
+    "service": "backend",
+    "workspaceFolder": "/app",
+    "shutdownAction": "stopCompose"
+  }
+  
