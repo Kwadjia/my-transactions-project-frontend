@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../Styling/BodyShops.css'; 
+import logo from '../Images/BSBai.png'; 
 
 const BodyShops = () => {
   const [latitude, setLatitude] = useState('');
@@ -57,50 +59,51 @@ const BodyShops = () => {
   };
 
   return (
-    <div>
+    <div className="bodyShopsContainer">
+      <img src={logo} alt="Company Logo" className="logo" />
+
       <h2>Find Nearby Body Shops</h2>
 
-      {/* Button to auto-fill current location */}
-      <button onClick={fetchCurrentLocation}>
+      <button className="locationButton" onClick={fetchCurrentLocation}>
         Use My Current Location
       </button>
 
-      {/* Form for manual input of latitude and longitude */}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Latitude:
-            <input
-              type="text"
-              value={latitude}
-              onChange={(e) => setLatitude(e.target.value)}
-            />
-          </label>
+        <div className="inputGroup">
+          <label htmlFor="latitude">Latitude:</label>
+          <input
+            id="latitude"
+            type="text"
+            value={latitude}
+            onChange={(e) => setLatitude(e.target.value)}
+          />
         </div>
-        <div>
-          <label>
-            Longitude:
-            <input
-              type="text"
-              value={longitude}
-              onChange={(e) => setLongitude(e.target.value)}
-            />
-          </label>
+
+        <div className="inputGroup">
+          <label htmlFor="longitude">Longitude:</label>
+          <input
+            id="longitude"
+            type="text"
+            value={longitude}
+            onChange={(e) => setLongitude(e.target.value)}
+          />
         </div>
-        <button type="submit">Find Body Shops</button>
+
+        <button type="submit" className="submitButton">
+          Find Body Shops
+        </button>
       </form>
 
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {loading && <p className="loadingMessage">Loading...</p>}
+      {error && <p className="errorMessage">{error}</p>}
 
-      {/* Display the list of body shops */}
       {bodyShops.length > 0 && (
-        <ul>
+        <ul className="bodyShopsList">
           {bodyShops.map((shop, index) => (
             <li key={index}>
-              <strong>{shop.displayName.text}</strong>
+              <strong>{shop.displayName?.text || 'Unknown Shop'}</strong>
               <br />
-              {shop.formattedAddress}
+              {shop.formattedAddress || 'No Address'}
             </li>
           ))}
         </ul>
